@@ -12,7 +12,7 @@ public class Heat : MonoBehaviour
 	private Image Fill;
 	[SerializeField] private float FillSpeed = 0.1f;
 	[SerializeField] private float heat = 200;
-	private bool venting;
+	private bool cooling;
     void Start()
     {
         Fill = GameObject.Find("Fill Heat").GetComponent<Image>();
@@ -25,13 +25,13 @@ public class Heat : MonoBehaviour
 
 			Fill.color = Color.Lerp(Color.blue, Color.red, heat / 1000);
 
-		if (!venting)
+		if (!cooling)
 		{
 			heat += FillSpeed;
 		}
-		else if (venting)
+		else if (cooling)
 		{
-			heat -= 0.5f;
+			heat -= 0.3f;
 		}
 		HeatSlider.value = heat;
 
@@ -46,17 +46,17 @@ public class Heat : MonoBehaviour
 
 	}
 
-	public void Vent()
+	public void Cool()
 	{
-		venting = true;
-		StartCoroutine(VentingTime());
+		cooling = true;
+		StartCoroutine(CoolingTime());
 		
 	}
 
-	public IEnumerator VentingTime()
+	public IEnumerator CoolingTime()
 	{
 		yield return new WaitForSeconds(3);
-		venting = false;
+		cooling = false;
 	}
 
 	public IEnumerator FillChange()
