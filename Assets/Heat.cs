@@ -10,40 +10,45 @@ public class Heat : MonoBehaviour
 
 	public Slider HeatSlider;
 	private Image Fill;
-	[SerializeField] private float FillSpeed = 0.1f;
+	private float FillSpeed = 1.0f;
 	[SerializeField] private float heat = 200;
 	private bool cooling;
+	private ScoreSystem controller;
     void Start()
     {
         Fill = GameObject.Find("Fill Heat").GetComponent<Image>();
 		StartCoroutine(FillChange());
+		controller = GetComponent<ScoreSystem>();
+
 	}
 
     // Update is called once per frame
     void Update()
 	{
-
-			Fill.color = Color.Lerp(Color.blue, Color.red, heat / 1000);
-
-		if (!cooling)
-		{
-			heat += FillSpeed;
-		}
-		else if (cooling)
-		{
-			heat -= 0.3f;
-		}
 		HeatSlider.value = heat;
-
+		Fill.color = Color.Lerp(Color.blue, Color.red, heat / 1000);
 		if (heat <= 0)
 		{
 			heat = 0;
 		}
 		if (heat >= HeatSlider.maxValue)
 		{
-			//Game Over! (TBD)
+			controller.Loss();
 		}
 
+	}
+
+	private void FixedUpdate()
+	{
+		if (!cooling && controller.GameOver == false)
+		{
+			heat += FillSpeed;
+		}
+		else if (cooling)
+		{
+			heat -= 3.0f;
+		}
+		
 	}
 
 	public void Cool()
@@ -55,14 +60,14 @@ public class Heat : MonoBehaviour
 
 	public IEnumerator CoolingTime()
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSecondsRealtime(3);
 		cooling = false;
 	}
 
 	public IEnumerator FillChange()
 	{
-		yield return new WaitForSeconds(30);
-		FillSpeed += 0.1f;
+		yield return new WaitForSecondsRealtime(30);
+		FillSpeed += 0.5f;
 		StartCoroutine(FillChange());
 
 	}
