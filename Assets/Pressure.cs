@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 public class Pressure : MonoBehaviour
 {
 	public GameObject Needle;
-	private float pressureIncrease = 0.1f;
+	private float pressureIncrease = 0.2f;
 	private bool Venting;
 	[SerializeField] private float rotation;
 	private ScoreSystem controller;

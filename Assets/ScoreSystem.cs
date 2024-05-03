@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
@@ -49,5 +50,11 @@ public class ScoreSystem : MonoBehaviour
 	{
 		yield return new WaitForSecondsRealtime(5);
 		NoSignal.enabled = true;
+		StartCoroutine(QuitTime());
+	}
+	IEnumerator QuitTime()
+	{
+		yield return new WaitForSecondsRealtime(3);
+		SceneManager.LoadScene(2);
 	}
 }

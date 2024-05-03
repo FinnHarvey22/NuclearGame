@@ -10,7 +10,7 @@ public class Heat : MonoBehaviour
 
 	public Slider HeatSlider;
 	private Image Fill;
-	private float FillSpeed = 1.0f;
+	private float FillSpeed = 1.5f;
 	[SerializeField] private float heat = 200;
 	private bool cooling;
 	private ScoreSystem controller;

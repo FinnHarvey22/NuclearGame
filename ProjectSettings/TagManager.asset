@@ -7,6 +7,9 @@ TagManager:
   - Explosion
   - NoSignal
   - Fuel
+  - PauseMenu
+  - Switch
+  - TimerText
   layers:
   - Default
   - TransparentFX
