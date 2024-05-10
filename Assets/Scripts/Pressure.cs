@@ -11,7 +11,7 @@ public class Pressure : MonoBehaviour
 	public GameObject Needle;
 	private float pressureIncrease = 0.2f;
 	private bool Venting;
-	[SerializeField] private float rotation;
+	public float rotation;
 	private ScoreSystem controller;
 
 	// Start is called before the first frame update
